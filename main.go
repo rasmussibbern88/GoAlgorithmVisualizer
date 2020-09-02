@@ -12,9 +12,9 @@ import (
 )
 
 func main() {
-	data := rand.Perm(6)
+	data := rand.Perm(50)
 
-	bogosort(data)
+	bublesort(data)
 
 }
 
@@ -29,7 +29,7 @@ func bogosort(data []int) {
 
 		})
 		images = append(images, figure.ArrayToImage(data))
-		delays = append(delays, 1)
+		delays = append(delays, 0)
 		if !sutil.Validate(data) {
 			continue
 		} else {
