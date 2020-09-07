@@ -12,9 +12,9 @@ import (
 )
 
 func main() {
-	data := rand.Perm(7)
+	data := rand.Perm(100)
 
-	bogosort(data)
+	insertionsort(data)
 
 }
 
@@ -48,6 +48,38 @@ func bogosort(data []int) {
 		LoopCount: -1,
 	})
 }
+
+func insertionsort(data []int) {
+
+		var images []*image.Paletted
+		var delays []int
+		//var disposals []byte
+
+		n := len(data)
+		for i := 1; i < n; i++ {
+			for j := i; j > 0 && data[j-1] > data[j]; j-- {
+				data[j], data[j-1] = data[j-1], data[j]
+				if j%5 == 0 {
+				images = append(images, figure.ArrayToImage(data))
+				delays = append(delays, 0)
+				}
+					//dis := byte(1)
+					//disposals = append(disposals, dis)
+			}
+		}
+		f, err := os.Create("insert.gif")
+		if err != nil {
+			panic(err)
+		}
+		w := bufio.NewWriter(f)
+
+		gif.EncodeAll(w, &gif.GIF{
+			Image: images,
+			Delay: delays,
+			//Disposal: disposals,
+		})
+}
+
 
 func bublesort(data []int) {
 
